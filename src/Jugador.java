@@ -29,6 +29,10 @@ public class Jugador {
         return edad;
     }
 
+    public long getGemas() {
+        return gemas;
+    }
+
     public void setGemas(long gemas) {
         this.gemas = gemas;
     }

@@ -18,7 +18,7 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Has elegido la ruleta.");
-                    System.out.println(player.getNombre());
+                    Ruleta.ruleta(player);
                     break;
                 case 3:
                     System.out.println("Has elegido entrar al garage.");

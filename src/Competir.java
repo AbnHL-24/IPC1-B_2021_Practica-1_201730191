@@ -69,32 +69,18 @@ public class Competir {
             }
         }
         String[][] competidoresEnCarrera = new String[competidores.length][5];
-        for (int i = 0; i < competidoresEnCarrera.length; i++) {
-            competidoresEnCarrera[i][0] = competidores[ordenAleatorioDeCompetidores[i]];
-        }
         for (int i = 0; i < competidores.length; i++) {
+            competidoresEnCarrera[i][0] = competidores[ordenAleatorioDeCompetidores[i]];
             if (player.getNombre().equals(competidoresEnCarrera[i][0])) {
                 competidoresEnCarrera[i][1] = player.getNombreCarroElecto(carroElecto);
-            } else {
-                competidoresEnCarrera[i][1] = Garage.nombreDeCarroAleatorio();
-            }
-        }
-        for (int i = 0; i < competidores.length; i++) {
-            if (player.getNombre().equals(competidoresEnCarrera[i][0])) {
                 competidoresEnCarrera[i][2] = player.getPotenciaDeMotorDelCarroElecto(carroElecto);
-            } else {
-                competidoresEnCarrera[i][2] = generarPotenciaMotorRival();
-            }
-        }
-        for (int i = 0; i < competidores.length; i++) {
-            competidoresEnCarrera[i][4] = "0";
-        }
-        for (int i = 0; i < competidores.length; i++) {
-            if (player.getNombre().equals(competidoresEnCarrera[i][0])) {
                 competidoresEnCarrera[i][3] = player.getCoheficienteDeLlantasDelCarroElecto(carroElecto);
             } else {
+                competidoresEnCarrera[i][1] = Garage.nombreDeCarroAleatorio();
+                competidoresEnCarrera[i][2] = generarPotenciaMotorRival();
                 competidoresEnCarrera[i][3] = generarCoheficienteLlantasRival();
             }
+            competidoresEnCarrera[i][4] = "0";
         }
         boolean continuar = true;
         System.out.println();
