@@ -84,11 +84,20 @@ public class Carro {
 
     }
 
-    public void imprimirCarroParaCarrera() {
-        System.out.println("1. " + nombreCarro);
+    public void imprimirCarroParaCarrera(int i) {
+        int numeroDeCarro = i+1;
+        System.out.println(numeroDeCarro + ". " + nombreCarro);
         System.out.println("La capacidad del tanque es "+ tanqueGasolina + ".");
         motores[motorPredeterminado].imprmirMotorPredeterminado();
         llantas[llantaPredeterminada].imprimirLlantaPredeterminada();
 
+    }
+
+    public int getPotenciaDelMotor() {
+        return motores[motorPredeterminado].getPotencia();
+    }
+
+    public int getCoheficienteDeLlantas() {
+        return llantas[llantaPredeterminada].getCoeficienteLlantas();
     }
 }

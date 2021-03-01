@@ -8,6 +8,7 @@ public class Jugador {
     int carroPredeterminado;
 
     Carro[] carros = new Carro [5];
+    boolean[] estadoDeVentaDeListaDeCarrosParaCompra = {false, false, false, false, false, false};
 
 
     public Jugador(String nombre, String nickname, int edad){
@@ -71,11 +72,13 @@ public class Jugador {
         cantidadCarros++;
     }
 
-    public void imprimirCarrosParaCarrera() {
+    public void imprimirCarrosParaCarrera(int tamañoDePista) {
         System.out.println();
         System.out.println("Escoge el carro que deseas utilizar:");
         for (int i = 0; i < cantidadCarros; i++) {
-            carros[i].imprimirCarroParaCarrera();
+            if (tamañoDePista <= carros[i].getTanqueGasolina()) {
+                carros[i].imprimirCarroParaCarrera(i);
+            }
         }
 
     }
@@ -93,5 +96,22 @@ public class Jugador {
         } else {
             return false;
         }
+    }
+
+    public int gasolinaCarroElecto(int carroElecto) {
+        //si escoge el carro n, el metodo buscara el carro en la posicion n-1
+        return carros[carroElecto-1].getTanqueGasolina();
+    }
+
+    public String getNombreCarroElecto(int carroElecto) {
+        return carros[carroElecto-1].getNombreCarro();
+    }
+
+    public String getPotenciaDeMotorDelCarroElecto(int carroElecto) {
+        return String.valueOf(carros[carroElecto-1].getPotenciaDelMotor());
+    }
+
+    public String getCoheficienteDeLlantasDelCarroElecto(int carroElecto) {
+        return String.valueOf(carros[carroElecto-1].getCoheficienteDeLlantas());
     }
 }

@@ -1,30 +1,12 @@
-1) Audi
-4) Porsche
-5) BMW
-6) Mazda
-8) Toyota
-9) Kia
-10) Honda
-11) Hyundai
-12) Volvo
-14) Mercedes-Benz
-15) Volkswagen
-16) Ford
-20) Chevrolet
-21) Nissan
-24) Cadillac
-25) Dodge
-27) Land Rover
-28) Mitsubishi
-29) Jeep
-
-Chervrolet Camaro
+Carros iniciales:
+Chervrolet Camaro SS
 Dodge Challenger Hellcat
 Ford Mustang GT
 
-Lamborgini Veneno
-Ferrari LaFerrari
-Tesla Roadster
+Carros disponibles para compra:
 Bugati Chiron
-Masserati*
-Alfa Romeo*
+Ferrari Enzo*
+Lamborgini Veneno
+Maserati MC20
+Pagani Huayra
+Tesla Roadster

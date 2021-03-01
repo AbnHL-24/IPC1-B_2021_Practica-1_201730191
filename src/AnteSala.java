@@ -12,9 +12,9 @@ public class AnteSala {
     }
 
     public static void crearPrimerCarro(Jugador player, String nombre) {
-        final String CHEVROLET_CAMARO = "Chevrolet Camaro";
-        final String DODGE_CHALLENGER = "Dodge Challenger";
-        final String FORD_MUSTANG = "Ford Mustang";
+        final String CHEVROLET_CAMARO_SS = "Chevrolet Camaro SS";
+        final String DODGE_CHALLENGER_HELLCAT = "Dodge Challenger Hellcat";
+        final String FORD_MUSTANG_GT = "Ford Mustang GT";
         Scanner scAnteSalaInt = new Scanner(System.in);
 
         System.out.println("Hola " + nombre);
@@ -23,17 +23,17 @@ public class AnteSala {
                 "\nlos tres carros tienen el motor y las llantas basicas," +
                 "\ndespues podras mejorarlos, incluso podras comprar mas carros, pero," +
                 "\nSOLO PUEDES TENER UNO DE ESTOS TRES CARROS.");
-        System.out.println("1. " + CHEVROLET_CAMARO);
-        System.out.println("2. " + DODGE_CHALLENGER);
-        System.out.println("3. " + FORD_MUSTANG);
+        System.out.println("1. " + CHEVROLET_CAMARO_SS);
+        System.out.println("2. " + DODGE_CHALLENGER_HELLCAT);
+        System.out.println("3. " + FORD_MUSTANG_GT);
 
         int eleccion = scAnteSalaInt.nextInt();
         if (eleccion == 1) {
-            player.crearCarro( CHEVROLET_CAMARO);
+            player.crearCarro( CHEVROLET_CAMARO_SS);
         } else if (eleccion == 2) {
-            player.crearCarro( DODGE_CHALLENGER);
+            player.crearCarro( DODGE_CHALLENGER_HELLCAT);
         } else {
-            player.crearCarro( FORD_MUSTANG);
+            player.crearCarro( FORD_MUSTANG_GT);
         }
         Menu.principal(player);
     }
