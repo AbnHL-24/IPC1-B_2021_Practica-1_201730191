@@ -2,12 +2,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Competir {
-    static int pistaElecta;
-    static int cantidadDeRivales;
-    static int carroElecto;
-    static Scanner scCompetirString = new Scanner(System.in);
-    static Scanner scComperitInt = new Scanner(System.in);
-    static Random rd = new Random();
+    private static int pistaElecta;
+    private static int cantidadDeRivales;
+    private static int carroElecto;
+    private static Scanner scCompetirString = new Scanner(System.in);
+    private static Scanner scComperitInt = new Scanner(System.in);
+    private static Random rd = new Random();
 
     public static void elecciones(Jugador player) {
         System.out.println("Escoge la pista en la que deseas competir.");
@@ -77,7 +77,7 @@ public class Competir {
                 competidoresEnCarrera[i][3] = player.getCoheficienteDeLlantasDelCarroElecto(carroElecto);
             } else {
                 competidoresEnCarrera[i][1] = Garage.nombreDeCarroAleatorio();
-                competidoresEnCarrera[i][2] = generarPotenciaMotorRival();
+                competidoresEnCarrera[i][2] = generarPotenciaMotorRival(); // donde guardar el resultado de la funcion.
                 competidoresEnCarrera[i][3] = generarCoheficienteLlantasRival();
             }
             competidoresEnCarrera[i][4] = "0";
@@ -104,7 +104,7 @@ public class Competir {
                     continuar = false;
                 }
             }
-            //proceder con la asignacion de oro y gemas, tambien con la resta de gasolina
+            //hacet todo los pos batalla
             //resolver el problema de las millas de mas
             //resolver como mandar los datos a los reportes
             //resolver lo de la revancha

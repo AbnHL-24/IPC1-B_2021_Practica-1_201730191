@@ -1,8 +1,8 @@
 public class TipoLlantas {
-    int coeficienteLlantas;
-    String calidadLlantas;
-    int precioLlantasOro;
-    boolean estadoDeCompra;
+    private int coeficienteLlantas;
+    private String calidadLlantas;
+    private int precioLlantasOro;
+    private boolean estadoDeCompra;
 
     public TipoLlantas(int coeficienteLlantas, String calidadLlantas, int precioLlantasOro, boolean estadoDeCompra){
         this.coeficienteLlantas = coeficienteLlantas;

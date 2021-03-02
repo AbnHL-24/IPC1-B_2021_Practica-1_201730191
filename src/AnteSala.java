@@ -29,11 +29,11 @@ public class AnteSala {
 
         int eleccion = scAnteSalaInt.nextInt();
         if (eleccion == 1) {
-            player.crearCarro( CHEVROLET_CAMARO_SS);
+            player.crearCarro(CHEVROLET_CAMARO_SS);
         } else if (eleccion == 2) {
-            player.crearCarro( DODGE_CHALLENGER_HELLCAT);
+            player.crearCarro(DODGE_CHALLENGER_HELLCAT);
         } else {
-            player.crearCarro( FORD_MUSTANG_GT);
+            player.crearCarro(FORD_MUSTANG_GT);
         }
         Menu.principal(player);
     }

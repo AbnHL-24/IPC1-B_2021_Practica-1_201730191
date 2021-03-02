@@ -1,8 +1,8 @@
 public class TipoMotor {
-    int potencia;
-    String rendimiento;
-    int precioMotorGemas;
-    boolean estadoCompra;
+    private int potencia;
+    private String rendimiento;
+    private int precioMotorGemas;
+    private boolean estadoCompra;
 
     public TipoMotor(int potencia, String rendimiento, int precioMotorGemas, boolean estadoCompra) {
         this.potencia = potencia;

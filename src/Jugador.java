@@ -1,11 +1,11 @@
 public class Jugador {
-    String nombre;
-    String nickname;
-    int edad;
-    long gemas = 30;
-    long oro = 50;
-    int cantidadCarros = 0;
-    int carroPredeterminado;
+    private String nombre;
+    private String nickname;
+    private int edad;
+    private long gemas = 30;
+    private long oro = 50;
+    private int cantidadCarros = 0;
+    private int carroPredeterminado;
 
     Carro[] carros = new Carro [5];
 
