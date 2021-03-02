@@ -51,7 +51,7 @@ public class Garage {
         String stringDePaso = scString.nextLine();
     }
 
-    private static void llenarElTanqueDeGasolina(Jugador player, int carroPredeterminado) {
+    public static void llenarElTanqueDeGasolina(Jugador player, int carroPredeterminado) {
         int gasolinaALlenar = 100 - player.carros[carroPredeterminado].getTanqueGasolina();
         long gasolinaEnOroLong = (long) (gasolinaALlenar*2.5);
         if (gasolinaALlenar == 0) {

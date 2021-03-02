@@ -11,39 +11,51 @@ public class Competir {
     private static Random rd = new Random();
 
     public static void elecciones(Jugador player) {
-        System.out.println("Escoge la pista en la que deseas competir.");
-        imprimirPistas();
-        pistaElecta = scComperitInt.nextInt();
-        while(pistaElecta > 3 | pistaElecta < 1) {
-            System.out.println("Has ingresado un numero de pista incorrecto." +
-                    "\nPor favor, elige correctamente una pista.");
+        do {
+            System.out.println("Escoge la pista en la que deseas competir.");
             imprimirPistas();
+            System.out.println("4. Salir.");
             pistaElecta = scComperitInt.nextInt();
-        }
-        System.out.println("Haz elegido la " + nombreDePista(pistaElecta));
-        boolean hayCarrosConGasolinaSuficiente = player.verificarGasolinaDeCarrosParaPista(tamañoDePista(pistaElecta));
-        if(hayCarrosConGasolinaSuficiente) {
-            player.imprimirCarrosParaCarrera(tamañoDePista(pistaElecta));
-            carroElecto = scComperitInt.nextInt();  //ingresa el carro que desea
+            if (pistaElecta == 1 | pistaElecta == 2 | pistaElecta ==3 ) {
+                System.out.println("Haz elegido la " + nombreDePista(pistaElecta));
+                boolean hayCarrosConGasolinaSuficiente = player.verificarGasolinaDeCarrosParaPista(tamañoDePista(pistaElecta));
+                if(hayCarrosConGasolinaSuficiente) {
+                    do {
+                        player.imprimirCarrosParaCarrera(tamañoDePista(pistaElecta));
+                        System.out.println("7. Salir.");
+                        carroElecto = scComperitInt.nextInt();  //ingresa el carro que desea
+                        if (carroElecto >= 1 && carroElecto <=6) {
+                            do {
+                                System.out.println("¿Contra cuantos corredores deseas competir?");
+                                System.out.println("Ingresa un numero entre uno y cinco");
+                                System.out.println("Ingresa 6 para salir.");
+                                cantidadDeRivales = scComperitInt.nextInt();
+                                if(cantidadDeRivales >0 && cantidadDeRivales <6) {
+                                preparacionParaCarrera(player, carroElecto, pistaElecta, cantidadDeRivales);
+                                } else if (cantidadDeRivales == 6) {
+                                    //salir
+                                } else {
+                                    System.out.println("Escoge una opcion correcta");
+                                }
+                            }while (cantidadDeRivales != 6);
 
-            // la condicion del while verifica que no se ingrese un numero mayor al numero de carros que se posee,
-            // un mumero de carro menor a 1 o que el jugador quiera escoger un carro que posee pero que no tiene gasolina
-            // suficiente para la compertencia.
-            while(carroElecto > player.getCantidadCarros() | carroElecto < 1 | tamañoDePista(pistaElecta) > player.gasolinaCarroElecto(carroElecto)) {
-                System.out.println("Has ingresado un numero de carro incorrecto." +
-                        "\nPor favor, elige correctamente un carro.");
-                player.imprimirCarrosParaCarrera(tamañoDePista(pistaElecta));
-                carroElecto = scComperitInt.nextInt();
+                        } else if(carroElecto == 7){
+                            //salir
+                        } else {
+                            System.out.println("Escoge una opcion correcta.");
+                        }
+                    } while (carroElecto !=7);
+                } else {
+                    System.out.println("No hay carros con la gasolina suficiente para realizar la carrera.");
+                    System.out.println("Recomendamos llenar al menos un tanque de gasolina o intentar en otra pista.");
+                    break;
+                }
+            } else if (pistaElecta == 4) {
+                //salir
+            } else {
+                System.out.println("Escoge una opcion correcta");
             }
-            System.out.println("¿Contra cuantos corredores deseas competir?");
-            System.out.println("Ingresa un numero entre uno y cinco");
-            cantidadDeRivales = scComperitInt.nextInt();
-            preparacionParaCarrera(player, carroElecto, pistaElecta, cantidadDeRivales);
-
-        } else {
-            System.out.println("No hay carros con la gasolina suficiente para realizar la carrera.");
-            System.out.println("Recomendamos llenar al menos un tanque de gasolina o intentar en otra pista.");
-        }
+        } while (pistaElecta != 4);
     }
 
     //Aca se creara la el arreglo bidimencional que sera usado para realizar las vueltas de la carrera
@@ -112,10 +124,6 @@ public class Competir {
                     continuar = false;
                 }
             }
-            //hacet todo los pos batalla
-            //resolver el problema de las millas de mas
-            //resolver como mandar los datos a los reportes
-            //resolver lo de la revancha
             System.out.println("Ingrese un espacio para continuar");
             String stringDePaso = scCompetirString.nextLine();
         } while(continuar);
@@ -169,7 +177,32 @@ public class Competir {
                 player.setGemas(nuevaCantidadDeGemas);
             }
         }
-        System.out.println("prueba");
+        String[] podio = new String [competidoresOrdenados.length];
+        for (int i = podio.length-1; i == 0 ; i--) {
+            int numeroPodio=1;
+            podio[i] = numeroPodio + ". " + competidoresOrdenados[i][0] + ", " + competidoresOrdenados[i][1] + " casillas avanzadas.";
+            numeroPodio++;
+        }
+        EstadisticasReportes.crearEstadistica(nombreDePista(pistaElecta), podio);
+        //resolver como mandar los datos a los reportes, mejorar ese null.
+        int revancha;
+        do {
+            System.out.println("¿Deseas una revancha?\n1. Si\n2. No");
+            revancha = scComperitInt.nextInt();
+            if (revancha == 1) {
+                Garage.llenarElTanqueDeGasolina(player, carroElecto);
+                if (player.carros[carroElecto].getTanqueGasolina() >= tamañoDePista(pistaElecta)) {
+                    elecciones(player);
+                }
+                else {
+                    Menu.principal(player);
+                }
+            } else if (revancha == 2) {
+                Menu.principal(player);
+            } else {
+                System.out.println("Escoge una opcion correcta.");
+            }
+        } while ( revancha !=2);
     }
 
     private static int avanceCasillas(int potenciaMotor, int coheficienteLlantas, int pistaElecta) {

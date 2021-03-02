@@ -26,7 +26,7 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Has elegido revisar las pistas.");
-                    System.out.println(player.getNombre());
+                    Pistas.imprimirPistas();
                     break;
                 case 5:
                     System.out.println("Has elegido revisar las estadisticas y reportes.");
