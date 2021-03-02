@@ -129,4 +129,13 @@ public class Carro {
     public void imprimirCarrosParaEleccionEnGarege(int numeroDeCarro) {
         System.out.println(numeroDeCarro +". " + getNombreCarro());
     }
+
+    public void imprimirCarrosParaReporte() {
+        System.out.println();
+        System.out.println(nombreCarro);
+        System.out.println("El oro gastado es: " + getOroGastado());
+        System.out.println("La cantidad de gasolina consumida es: " + getGasolinaConsumida());
+        System.out.println("La cantidad de gasolina comprada es: " + getGasolinaComprada());
+        System.out.println();
+    }
 }

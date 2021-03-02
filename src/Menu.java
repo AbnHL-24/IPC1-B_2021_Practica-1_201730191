@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Menu {
-    static Scanner scMenuInt = new Scanner(System.in);
+    static Scanner scInt = new Scanner(System.in);
     //static Scanner scMenuString = new Scanner(System.in);
     static int eleccion;
 
@@ -10,7 +10,7 @@ public class Menu {
             System.out.println();
             System.out.println("Escoja una opcion");
             imprimirMenuPrincipal();
-            eleccion = scMenuInt.nextInt();
+            eleccion = scInt.nextInt();
             switch (eleccion){
                 case 1:
                     System.out.println("Has elegido competir.");
@@ -30,7 +30,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("Has elegido revisar las estadisticas y reportes.");
-                    System.out.println(player.getNombre());
+                    EstadisticasReportes.inicio(player);
                     break;
                 case 6:
                     System.out.println("Has pronto.");
