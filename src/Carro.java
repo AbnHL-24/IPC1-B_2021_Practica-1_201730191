@@ -71,6 +71,22 @@ public class Carro {
         this.llantas = llantas;
     }
 
+    public int getMotorPredeterminado() {
+        return motorPredeterminado;
+    }
+
+    public void setMotorPredeterminado(int motorPredeterminado) {
+        this.motorPredeterminado = motorPredeterminado;
+    }
+
+    public int getLlantaPredeterminada() {
+        return llantaPredeterminada;
+    }
+
+    public void setLlantaPredeterminada(int llantaPredeterminada) {
+        this.llantaPredeterminada = llantaPredeterminada;
+    }
+
     public void crearMotores() {
         motores[0] = new TipoMotor(4, "Motor basico.", 5, true);
         motores[1] = new TipoMotor(5, "Motor medio.", 20, false);
@@ -99,5 +115,9 @@ public class Carro {
 
     public int getCoheficienteDeLlantas() {
         return llantas[llantaPredeterminada].getCoeficienteLlantas();
+    }
+
+    public void imprimirCarrosParaEleccionEnGarege(int numeroDeCarro) {
+        System.out.println(numeroDeCarro +". " + getNombreCarro());
     }
 }

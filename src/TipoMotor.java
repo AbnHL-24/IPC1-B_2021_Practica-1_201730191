@@ -35,7 +35,7 @@ public class TipoMotor {
         this.precioMotorGemas = precioMotorGemas;
     }
 
-    public boolean isEstadoCompra() {
+    public boolean getEstadoCompra() {
         return estadoCompra;
     }
 

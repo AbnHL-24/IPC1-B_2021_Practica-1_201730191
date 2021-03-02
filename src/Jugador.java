@@ -8,8 +8,6 @@ public class Jugador {
     int carroPredeterminado;
 
     Carro[] carros = new Carro [5];
-    boolean[] estadoDeVentaDeListaDeCarrosParaCompra = {false, false, false, false, false, false};
-
 
     public Jugador(String nombre, String nickname, int edad){
         this.nombre = nombre;
@@ -117,5 +115,11 @@ public class Jugador {
 
     public String getCoheficienteDeLlantasDelCarroElecto(int carroElecto) {
         return String.valueOf(carros[carroElecto-1].getCoheficienteDeLlantas());
+    }
+
+    public void imprimirCarrosComprados() {
+        for (int i = 0; i < cantidadCarros; i++) {
+            carros[i].imprimirCarrosParaEleccionEnGarege(i+1);
+        }
     }
 }

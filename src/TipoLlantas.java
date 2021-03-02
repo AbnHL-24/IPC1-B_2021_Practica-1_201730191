@@ -2,13 +2,13 @@ public class TipoLlantas {
     int coeficienteLlantas;
     String calidadLlantas;
     int precioLlantasOro;
-    boolean estadoCompra;
+    boolean estadoDeCompra;
 
-    public TipoLlantas(int coeficienteLlantas, String calidadLlantas, int precioLlantasOro, boolean estadoCompra){
+    public TipoLlantas(int coeficienteLlantas, String calidadLlantas, int precioLlantasOro, boolean estadoDeCompra){
         this.coeficienteLlantas = coeficienteLlantas;
         this.calidadLlantas = calidadLlantas;
         this.precioLlantasOro = precioLlantasOro;
-        this.estadoCompra = estadoCompra;
+        this.estadoDeCompra = estadoDeCompra;
     }
 
     public int getCoeficienteLlantas() {
@@ -35,12 +35,12 @@ public class TipoLlantas {
         this.precioLlantasOro = precioLlantasOro;
     }
 
-    public boolean isEstadoCompra() {
-        return estadoCompra;
+    public boolean getEstadoDeCompra() {
+        return estadoDeCompra;
     }
 
-    public void setEstadoCompra(boolean estadoCompra) {
-        this.estadoCompra = estadoCompra;
+    public void setEstadoDeCompra(boolean estadoDeCompra) {
+        this.estadoDeCompra = estadoDeCompra;
     }
 
     public void imprimirLlantaPredeterminada() {

@@ -22,7 +22,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Has elegido entrar al garage.");
-                    System.out.println(player.getNombre());
+                    Garage.principal(player);
                     break;
                 case 4:
                     System.out.println("Has elegido revisar las pistas.");
