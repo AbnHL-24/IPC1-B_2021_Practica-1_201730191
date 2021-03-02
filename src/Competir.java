@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -37,7 +38,7 @@ public class Competir {
             System.out.println("¿Contra cuantos corredores deseas competir?");
             System.out.println("Ingresa un numero entre uno y cinco");
             cantidadDeRivales = scComperitInt.nextInt();
-            carrera(player, carroElecto, pistaElecta, cantidadDeRivales);
+            preparacionParaCarrera(player, carroElecto, pistaElecta, cantidadDeRivales);
 
         } else {
             System.out.println("No hay carros con la gasolina suficiente para realizar la carrera.");
@@ -45,7 +46,8 @@ public class Competir {
         }
     }
 
-    private static void carrera(Jugador player, int carroElecto, int pistaElecta, int cantidadDeRivales) {
+    //Aca se creara la el arreglo bidimencional que sera usado para realizar las vueltas de la carrera
+    private static void preparacionParaCarrera(Jugador player, int carroElecto, int pistaElecta, int cantidadDeRivales) {
         String[] nombresDeRivales = {"Asael", "Alfredo", "Javier", "Julio", "Eduardo"};
         String[] competidores = new String[cantidadDeRivales + 1];
         competidores[0] = player.getNombre(); //establesco el nombre del jugador en [0] y el de los rivales en los siguientes
@@ -82,10 +84,16 @@ public class Competir {
             }
             competidoresEnCarrera[i][4] = "0";
         }
+        vueltas(player, competidoresEnCarrera, carroElecto, pistaElecta);
+        System.out.println("Prueba");//mandar reportes
+    }
+
+    //vueltas() realiza la carrera en si, es decir, determina al ganador.
+    private static void vueltas(Jugador player, String[][] competidoresEnCarrera, int carroElecto, int pistaElecta) {
         boolean continuar = true;
         System.out.println();
         do {
-            for (int i = 0; i < competidores.length; i++) {
+            for (int i = 0; i < competidoresEnCarrera.length; i++) {
                 int potenciaMotor = Integer.parseInt(competidoresEnCarrera[i][2]);
                 int coheficienteLlantas = Integer.parseInt(competidoresEnCarrera[i][3]);
                 int casillasAvanzadas = avanceCasillas(potenciaMotor, coheficienteLlantas, pistaElecta);
@@ -95,10 +103,10 @@ public class Competir {
                     System.out.print("-");
                 }
                 System.out.print("> " + competidoresEnCarrera[i][1] + " de " + competidoresEnCarrera[i][0]
-                + " ha avanzado "+ casillasAvanzadas + " casillas en este turno, y " + competidoresEnCarrera[i][4] + " en total.");
+                        + " ha avanzado "+ casillasAvanzadas + " casillas en este turno, y " + competidoresEnCarrera[i][4] + " en total.");
                 System.out.println();
             }
-            for (int i = 0; i < competidores.length; i++) {
+            for (int i = 0; i < competidoresEnCarrera.length; i++) {
                 int casillas = Integer.parseInt(competidoresEnCarrera[i][4]);
                 if(casillas >= tamañoDePista(pistaElecta)) {
                     continuar = false;
@@ -111,8 +119,57 @@ public class Competir {
             System.out.println("Ingrese un espacio para continuar");
             String stringDePaso = scCompetirString.nextLine();
         } while(continuar);
+        postCarrera(player, competidoresEnCarrera, carroElecto-1, pistaElecta);
+    }
 
-        System.out.println("Prueba");
+    private static void postCarrera(Jugador player, String[][] competidoresEnCarrera, int carroElecto, int pistaElecta) {
+        int[] casillasAvanzadasCompetidoresOrdenadas = new int[competidoresEnCarrera.length];
+        for (int i = 0; i < competidoresEnCarrera.length; i++) {
+            casillasAvanzadasCompetidoresOrdenadas[i] = Integer.parseInt(competidoresEnCarrera[i][4]);
+        }
+        Arrays.sort(casillasAvanzadasCompetidoresOrdenadas);
+        String[][] competidoresOrdenados = new String[competidoresEnCarrera.length][2];
+        for (int i = 0; i < casillasAvanzadasCompetidoresOrdenadas.length; i++) {
+                String letraI = String.valueOf(casillasAvanzadasCompetidoresOrdenadas[i]);
+            for (int j = 0; j < casillasAvanzadasCompetidoresOrdenadas.length; j++) {
+                if (letraI.equals(competidoresEnCarrera[j][4])) {
+                    competidoresOrdenados[i][0] = competidoresEnCarrera[j][0];
+                    competidoresOrdenados[i][1] = competidoresEnCarrera[j][4];
+                }
+            }
+        }
+        System.out.println("El ganador es: " + competidoresOrdenados[competidoresOrdenados.length-1][0]);
+        for (int i = 0; i < competidoresOrdenados.length; i++) {//remplaza exedente de casillas con la longitud de casillas.
+            int casillasI = Integer.parseInt(competidoresOrdenados[i][1]);
+            if (casillasI > tamañoDePista(pistaElecta)) {
+                String tamañoPista = String.valueOf(tamañoDePista(pistaElecta));
+                competidoresOrdenados[i][1] = tamañoPista;
+            }
+        }
+        int potenciaDelRival = 0; //obtenemos potencia del rival para usar en las formulas de oro y gemas
+        for (int i = 0; i < competidoresEnCarrera.length; i++) {
+            if(player.getNombre().equals(competidoresEnCarrera[i][0])) {
+            } else {
+                potenciaDelRival += Integer.parseInt(competidoresEnCarrera[i][2]);
+            }
+        }
+        potenciaDelRival = potenciaDelRival/competidoresEnCarrera.length;
+        for (int i = 0; i < competidoresOrdenados.length; i++) {//establece nuevos valores dentro de jugador.
+            if(player.getNombre().equals(competidoresOrdenados[i][0])) {
+                int casillasRecorridas = Integer.parseInt(competidoresOrdenados[i][1]);
+                int gasolinaRestante = player.carros[carroElecto].getTanqueGasolina() - casillasRecorridas;
+                player.carros[carroElecto].setTanqueGasolina(gasolinaRestante);
+                long nuevaGasolinaConsumida = player.carros[carroElecto].getGasolinaConsumida() + casillasRecorridas;
+                player.carros[carroElecto].setGasolinaConsumida(nuevaGasolinaConsumida);
+                long oroObtenido = (long) potenciaDelRival * (rd.nextInt(10)+1) + coheficienteDePista(pistaElecta);
+                long nuevaCantidadDeOro = player.getOro() + oroObtenido;
+                player.setOro(nuevaCantidadDeOro);
+                long gemasObtenidas = potenciaDelRival + (rd.nextInt(10)+1) + coheficienteDePista(pistaElecta);
+                long nuevaCantidadDeGemas = player.getGemas() + gemasObtenidas;
+                player.setGemas(nuevaCantidadDeGemas);
+            }
+        }
+        System.out.println("prueba");
     }
 
     private static int avanceCasillas(int potenciaMotor, int coheficienteLlantas, int pistaElecta) {
@@ -120,24 +177,28 @@ public class Competir {
     }
 
     private static String generarCoheficienteLlantasRival() {
-        int random = rd.nextInt(3);
+        int random = rd.nextInt(4);
         if (random == 0) {
             return "2";
         } else if (random == 1) {
             return "3";
-        } else {
+        } else if (random == 2) {
             return "5";
+        } else {
+            return "1";
         }
     }
 
     private static String generarPotenciaMotorRival() {
-        int random = rd.nextInt(3);
+        int random = rd.nextInt(4);
         if (random == 0) {
             return "4";
         } else if (random == 1) {
             return "5";
-        } else {
+        } else if (random == 2) {
             return "7";
+        } else {
+            return "2";
         }
     }
 
